@@ -1,55 +1,39 @@
-package com.example.projetfinal;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.content.ContentValues;
+import android.database.Cursor;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import android.os.Bundle;
+public class Task extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "tasks.db";
+    private static final int DATABASE_VERSION = 1;
 
-@Entity(tableName = "TO_DO")
-public class Task {
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    public static final String TABLE_TASKS = "tasks";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_TITLE = "title";
+    public static final String COLUMN_CONTENT = "content";
+    public static final String COLUMN_STATUS = "status";
 
-    private String title;
-    private String contenu;
-    private String  Statut;
+    private static final String TABLE_CREATE =
+            "CREATE TABLE " + TABLE_TASKS + " (" +
+                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    COLUMN_TITLE + " TEXT, " +
+                    COLUMN_CONTENT + " TEXT, " +
+                    COLUMN_STATUS + " TEXT" +
+                    ");";
 
-    public Task(int id, String title,String Statut,String contenu) {
-        this.id = id;
-        this.title = title;
-        this.contenu=contenu;
-        this.Statut=Statut;
-    }
-    public Task(){}
-
-    public int getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-    public String getContenu() {
-        return contenu;
-    }
-    public String getStatut() {
-        return Statut;
+    public Task(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    public void setTitle(String title)
-    {
-        this.title = title;
-    }
-    public void setContenu(String contenu)
-    {
-       this.contenu=contenu;
-    }
-    public void setStatut(String Statut)
-    {
-         this.Statut=Statut;
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(TABLE_CREATE);
     }
 
-
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
+        onCreate(db);
+    }
 }
-
-
-

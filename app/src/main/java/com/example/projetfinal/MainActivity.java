@@ -25,6 +25,13 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, Ajouter_taches_Activity.class);
                 startActivity(intent);
             }
+            tachesBDD = new Taches_bases_de_donnees(this);
+        tachesBDD.insertTask("Titre de la tâche", "Contenu de la tâche", "À faire");
+            List<ListItemTask> allTasks = tachesBDD.getAllTasks();
+        for (ListItemTask task : allTasks) {
+                System.out.println("Titre : " + task.getTitle() + ", Contenu : " + task.getContent() + ", Statut : " + task.getStatus());
+            }
         });
     }
 }
+
