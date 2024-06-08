@@ -1,39 +1,57 @@
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.content.ContentValues;
-import android.database.Cursor;
+package com.example.projetfinal;
 
-public class Task extends SQLiteOpenHelper {
-    private static final String DATABASE_NAME = "tasks.db";
-    private static final int DATABASE_VERSION = 1;
+public class Task {
+    private int id;
+    private String title;
+    private String content;
+    private String status;
 
-    public static final String TABLE_TASKS = "tasks";
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_CONTENT = "content";
-    public static final String COLUMN_STATUS = "status";
+    public Task(int id, String title, String content, String status) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.status = status;
+    }
 
-    private static final String TABLE_CREATE =
-            "CREATE TABLE " + TABLE_TASKS + " (" +
-                    COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                    COLUMN_TITLE + " TEXT, " +
-                    COLUMN_CONTENT + " TEXT, " +
-                    COLUMN_STATUS + " TEXT" +
-                    ");";
+    public int getId() {
+        return id;
+    }
 
-    public Task(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(TABLE_CREATE);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TASKS);
-        onCreate(db);
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", status='" + status + '\'' +
+                '}';
     }
 }
