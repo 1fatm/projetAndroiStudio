@@ -3,6 +3,7 @@ package com.example.projetfinal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -35,8 +36,15 @@ public class Modifier_tache extends AppCompatActivity {
 
                 titleEditText.setText(task.getTitle());
                 contentEditText.setText(task.getContent());
+
                 // Assurez-vous que le Spinner est correctement configuré pour afficher les statuts
-                //statusSpinner.setSelection(adapter.getPosition(task.getStatus()));
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                        R.array.status_array, android.R.layout.simple_spinner_item);
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                statusSpinner.setAdapter(adapter);
+
+                int spinnerPosition = adapter.getPosition(task.getStatus());
+                statusSpinner.setSelection(spinnerPosition);
 
                 Button updateButton = findViewById(R.id.add_task_button);
                 updateButton.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +53,12 @@ public class Modifier_tache extends AppCompatActivity {
                         String updatedTitle = titleEditText.getText().toString();
                         String updatedContent = contentEditText.getText().toString();
                         String updatedStatus = statusSpinner.getSelectedItem().toString();
-                         int taskId=task.getId();
-                        taskDataSource.updateTask( taskId,updatedTitle,updatedContent,updatedStatus );
+
+                        task.setTitle(updatedTitle);
+                        task.setContent(updatedContent);
+                        task.setStatus(updatedStatus);
+
+                        taskDataSource.updateTask(task);
                         Toast.makeText(Modifier_tache.this, "Tâche mise à jour", Toast.LENGTH_SHORT).show();
                         finish();
                     }

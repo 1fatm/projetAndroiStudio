@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log; // Ajouter cette ligne
+import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,18 +34,17 @@ public class TaskDataSource {
         Log.d("Database", "Inserted task with ID: " + insertedId);
     }
 
-    public void updateTask(int taskId, String title, String content, String status) {
+    public void updateTask(Task task) {
         ContentValues values = new ContentValues();
-        values.put(TaskDatabaseHelper.COLUMN_TITLE, title);
-        values.put(TaskDatabaseHelper.COLUMN_CONTENT, content);
-        values.put(TaskDatabaseHelper.COLUMN_STATUS, status);
-
+        values.put(TaskDatabaseHelper.COLUMN_TITLE, task.getTitle());
+        values.put(TaskDatabaseHelper.COLUMN_CONTENT, task.getContent());
+        values.put(TaskDatabaseHelper.COLUMN_STATUS, task.getStatus());
         String whereClause = TaskDatabaseHelper.COLUMN_ID + "=?";
-        String[] whereArgs = { String.valueOf(taskId) };
-
+        String[] whereArgs = { String.valueOf(task.getId()) };
         int rowsUpdated = database.update(TaskDatabaseHelper.TABLE_TASKS, values, whereClause, whereArgs);
-        Log.d("Database", "Updated task with ID: " + taskId + ". Rows affected: " + rowsUpdated);
+        Log.d("Database", "Updated task with ID: " + task.getId() + ". Rows affected: " + rowsUpdated);
     }
+
     public List<Task> getAllTasks() {
         List<Task> taskList = new ArrayList<>();
         Cursor cursor = database.query(TaskDatabaseHelper.TABLE_TASKS,
@@ -79,8 +78,7 @@ public class TaskDataSource {
                 new String[]{TaskDatabaseHelper.COLUMN_ID, TaskDatabaseHelper.COLUMN_TITLE, TaskDatabaseHelper.COLUMN_CONTENT, TaskDatabaseHelper.COLUMN_STATUS},
                 TaskDatabaseHelper.COLUMN_ID + "=?", new String[]{String.valueOf(taskId)},
                 null, null, null, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
+        if (cursor != null && cursor.moveToFirst()) {
             Task task = cursorToTask(cursor);
             cursor.close();
             return task;

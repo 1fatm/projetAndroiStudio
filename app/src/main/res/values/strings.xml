@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">ProjetFinal</string>
+    <string-array name="status_array">
+        <item>To Do</item>
+        <item>Done</item>
+        <item>In Progress</item>
+        <item>Bug</item>
+    </string-array>
 </resources>
