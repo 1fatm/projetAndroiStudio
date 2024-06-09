@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,10 +16,20 @@ public class Modifier_tache extends AppCompatActivity {
     private TaskDataSource taskDataSource;
     private Task task;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifier_tache);
+        ImageView cancelImage = findViewById(R.id.annuler_tache);
+        cancelImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Retourner à l'activité principale
+                Intent intent = new Intent(Modifier_tache.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         taskDataSource = new TaskDataSource(this);
         taskDataSource.open();
@@ -72,6 +83,7 @@ public class Modifier_tache extends AppCompatActivity {
             finish();
         }
     }
+
 
     @Override
     protected void onDestroy() {
