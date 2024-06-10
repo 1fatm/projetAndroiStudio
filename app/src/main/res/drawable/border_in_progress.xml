@@ -5,5 +5,5 @@
     <corners android:radius="16dp" />
     <stroke
         android:width="2dp"
-        android:color="#03A9F4" /> <!-- Couleur pour "To Do" -->
+        android:color="#03A9F4" />
 </shape>

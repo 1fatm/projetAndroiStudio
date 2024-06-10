@@ -52,6 +52,10 @@ public class Ajouter_taches_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Définition de la couleur de l'indicateur de statut
+        ImageView statusIndicator = findViewById(R.id.status_indicator_add_task);
+        statusIndicator.setImageResource(R.drawable.cercle_in_progress); // Utilisez le fichier XML correspondant à la couleur désirée
     }
 
     private void addTask() {
