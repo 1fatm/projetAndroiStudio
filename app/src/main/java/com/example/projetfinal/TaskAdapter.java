@@ -1,4 +1,5 @@
 package com.example.projetfinal;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,20 +27,33 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
         Task currentTask = getItem(position);
 
-        // Personnalisez l'apparence de chaque élément de la liste ici
         if (currentTask != null) {
             TextView titleTextView = itemView.findViewById(R.id.task_title);
             titleTextView.setText(currentTask.getTitle());
 
-            // Définissez la couleur de la bordure en fonction du statut de la tâche
-            if (currentTask.getStatus().equals("To Do")) {
-                itemView.setBackgroundResource(R.drawable.border_todo);
-            } else if (currentTask.getStatus().equals("Done")) {
-                itemView.setBackgroundResource(R.drawable.border_done);
-            } else if (currentTask.getStatus().equals("In Progress")) {
-                itemView.setBackgroundResource(R.drawable.border_in_progress);
-            } else if (currentTask.getStatus().equals("Bug")) {
-                itemView.setBackgroundResource(R.drawable.border_bug);
+            View statusCircle = itemView.findViewById(R.id.status_circle);
+
+            switch (currentTask.getStatus()) {
+                case "To Do":
+                    itemView.setBackgroundResource(R.drawable.border_todo);
+                    statusCircle.setBackgroundResource(R.drawable.circle_todo);
+                    break;
+                case "Done":
+                    itemView.setBackgroundResource(R.drawable.border_done);
+                    statusCircle.setBackgroundResource(R.drawable.cercle_done);
+                    break;
+                case "In Progress":
+                    itemView.setBackgroundResource(R.drawable.border_in_progress);
+                    statusCircle.setBackgroundResource(R.drawable.cercle_in_progress);
+                    break;
+                case "Bug":
+                    itemView.setBackgroundResource(R.drawable.border_bug);
+                    statusCircle.setBackgroundResource(R.drawable.cercle_bug);
+                    break;
+                default:
+                    itemView.setBackgroundResource(R.drawable.border_task);
+                    statusCircle.setBackgroundResource(R.drawable.circle);
+                    break;
             }
         }
 

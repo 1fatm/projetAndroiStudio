@@ -20,7 +20,7 @@
             android:textSize="24sp"
             android:layout_alignParentStart="true"
             android:layout_marginStart="16dp"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true" />
 
         <ImageView
             android:id="@+id/action_filter"
@@ -36,10 +36,10 @@
     <ListView
         android:id="@+id/task_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar"
-        android:layout_above="@id/ajouter_tâche"
-        android:padding="16dp"/>
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="8dp" /> <!-- Espace entre les éléments -->
+
 
     <!-- ImageView to add new task -->
     <ImageView

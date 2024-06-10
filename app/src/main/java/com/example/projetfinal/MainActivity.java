@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -67,27 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadTaskTitles() {
         allTasks = taskDataSource.getAllTasks();
-        updateTaskListView(allTasks);
-    }
-
-    private void updateTaskListView(List<Task> tasks) {
-        List<String> taskTitles = new ArrayList<>();
-        for (Task task : tasks) {
-            taskTitles.add(task.getTitle());
-        }
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, taskTitles);
+        TaskAdapter adapter = new TaskAdapter(this, allTasks);
         taskListView.setAdapter(adapter);
-        taskListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Task selectedTask = tasks.get(position);
-                // Ouvrir l'écran de modification avec l'ID de la tâche sélectionnée
-                Intent intent = new Intent(MainActivity.this, Modifier_tache.class);
-                intent.putExtra("taskId", selectedTask.getId());
-                startActivity(intent);
-            }
-        });
     }
 
     private void showFilterDialog() {
@@ -102,7 +82,8 @@ public class MainActivity extends AppCompatActivity {
                 filteredTasks.add(task);
             }
         }
-        updateTaskListView(filteredTasks);
+        TaskAdapter adapter = new TaskAdapter(this, filteredTasks);
+        taskListView.setAdapter(adapter);
     }
 
     @Override
