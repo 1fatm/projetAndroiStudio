@@ -3,7 +3,6 @@ package com.example.projetfinal;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -16,10 +15,10 @@ public class Modifier_tache extends AppCompatActivity {
     private TaskDataSource taskDataSource;
     private Task task;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_modifier_tache);
         ImageView cancelImage = findViewById(R.id.annuler_tache);
         cancelImage.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +29,17 @@ public class Modifier_tache extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // Récupérer le Spinner status_button
+        Spinner statusSpinner = findViewById(R.id.status_button);
+
+        // Définir les statuts et les couleurs correspondantes
+        String[] statuses = {"To Do", "Done", "In Progress", "Bug"};
+        int[] colors = {R.color.gray, R.color.green, R.color.blue, R.color.red};
+
+        // Créer un CustomSpinnerAdapter et le configurer
+        CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, statuses, colors);
+        statusSpinner.setAdapter(adapter);
 
         taskDataSource = new TaskDataSource(this);
         taskDataSource.open();
@@ -43,15 +53,9 @@ public class Modifier_tache extends AppCompatActivity {
             if (task != null) {
                 EditText titleEditText = findViewById(R.id.task_title_textview);
                 EditText contentEditText = findViewById(R.id.task_content_edittext);
-                Spinner statusSpinner = findViewById(R.id.status_button);
 
                 titleEditText.setText(task.getTitle());
                 contentEditText.setText(task.getContent());
-
-                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                        R.array.status_array, android.R.layout.simple_spinner_item);
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                statusSpinner.setAdapter(adapter);
 
                 int spinnerPosition = adapter.getPosition(task.getStatus());
                 statusSpinner.setSelection(spinnerPosition);
@@ -82,7 +86,6 @@ public class Modifier_tache extends AppCompatActivity {
             finish();
         }
     }
-
 
     @Override
     protected void onDestroy() {

@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".Modifier_tache">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -14,7 +15,7 @@
             android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Modifier tâche"
+            android:text="Modifier une Tâche"
             android:textColor="@android:color/white"
             android:textSize="24sp"
             android:layout_alignParentStart="true"
@@ -23,7 +24,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:id="@+id/update_tache"
+        android:id="@+id/add_task_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
@@ -36,12 +37,12 @@
 
     <Spinner
         android:id="@+id/status_button"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/update_tache"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/add_task_label"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="28dp"
         android:background="@drawable/eddittext_border"
         android:padding="10dp"
         android:spinnerMode="dropdown"
@@ -58,7 +59,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/eddittext_border"
-        android:hint="Modifier titre tâche"
+        android:hint="Nouvelle tâche"
         android:padding="10dp" />
 
     <EditText
@@ -71,7 +72,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/eddittext_border"
         android:gravity="top|start"
-        android:hint="Modifier Contenu de la tâche"
+        android:hint="Contenu de la tâche"
         android:inputType="textMultiLine"
         android:padding="10dp" />
 
