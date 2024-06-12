@@ -1,6 +1,6 @@
 <resources>
-    <color name="color_todo">#FFEB3B</color> <!-- Jaune -->
-    <color name="color_done">#4CAF50</color> <!-- Vert -->
-    <color name="color_in_progress">#2196F3</color> <!-- Bleu -->
-    <color name="color_bug">#F44336</color> <!-- Rouge -->
+    <color name="gray"> #4F4F4F</color>
+    <color name="blue">#56CCF2</color>
+    <color name="green">#27AE60</color>
+    <color name="red">#EB5757</color>
 </resources>

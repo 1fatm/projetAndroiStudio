@@ -33,28 +33,39 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
             View statusCircle = itemView.findViewById(R.id.status_circle);
 
-            switch (currentTask.getStatus()) {
+            // Récupération du statut de la tâche
+            String status = currentTask.getStatus();
+
+            // Sélection de la ressource du contour et du cercle en fonction du statut
+            int borderResourceId;
+            int circleResourceId;
+
+            switch (status) {
                 case "To Do":
-                    itemView.setBackgroundResource(R.drawable.border_todo);
-                    statusCircle.setBackgroundResource(R.drawable.circle_todo);
+                    borderResourceId = R.drawable.border_todo;
+                    circleResourceId = R.drawable.circle_todo;
                     break;
                 case "Done":
-                    itemView.setBackgroundResource(R.drawable.border_done);
-                    statusCircle.setBackgroundResource(R.drawable.cercle_done);
+                    borderResourceId = R.drawable.border_done;
+                    circleResourceId = R.drawable.cercle_done;
                     break;
                 case "In Progress":
-                    itemView.setBackgroundResource(R.drawable.border_in_progress);
-                    statusCircle.setBackgroundResource(R.drawable.cercle_in_progress);
+                    borderResourceId = R.drawable.border_in_progress;
+                    circleResourceId = R.drawable.cercle_in_progress;
                     break;
                 case "Bug":
-                    itemView.setBackgroundResource(R.drawable.border_bug);
-                    statusCircle.setBackgroundResource(R.drawable.cercle_bug);
+                    borderResourceId = R.drawable.border_bug;
+                    circleResourceId = R.drawable.cercle_bug;
                     break;
                 default:
-                    itemView.setBackgroundResource(R.drawable.border_task);
-                    statusCircle.setBackgroundResource(R.drawable.circle);
+                    borderResourceId = R.drawable.border_task;
+                    circleResourceId = R.drawable.circle;
                     break;
             }
+
+            // Affectation des ressources aux vues
+            itemView.setBackgroundResource(borderResourceId);
+            statusCircle.setBackgroundResource(circleResourceId);
         }
 
         return itemView;

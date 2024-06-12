@@ -48,7 +48,6 @@ public class Modifier_tache extends AppCompatActivity {
                 titleEditText.setText(task.getTitle());
                 contentEditText.setText(task.getContent());
 
-                // Assurez-vous que le Spinner est correctement configuré pour afficher les statuts
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                         R.array.status_array, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

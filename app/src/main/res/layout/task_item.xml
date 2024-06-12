@@ -12,6 +12,16 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/circle_todo" />
 
+    <!-- Affichage du statut de la tâche -->
+    <TextView
+        android:id="@+id/task_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:padding="4dp" />
+
+    <!-- Titre de la tâche -->
     <TextView
         android:id="@+id/task_title"
         android:layout_width="wrap_content"

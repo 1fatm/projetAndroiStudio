@@ -1,7 +1,6 @@
 package com.example.projetfinal;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,8 +28,8 @@ public class Ajouter_taches_Activity extends AppCompatActivity {
         contentEditText = findViewById(R.id.task_content_edittext);
         statusSpinner = findViewById(R.id.status_button);
 
-        String[] statuses = {"Todo", "In Progress", "Done", "Bug"};
-        int[] colors = {Color.GRAY, Color.BLUE, Color.GREEN, Color.RED};
+        String[] statuses = {"To Do", "Done", "In Progress", "Bug"};
+        int[] colors = {R.color.gray, R.color.green, R.color.blue, R.color.red};
 
         CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, statuses, colors);
         statusSpinner.setAdapter(adapter);
@@ -52,16 +51,17 @@ public class Ajouter_taches_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        // Définition de la couleur de l'indicateur de statut
-        ImageView statusIndicator = findViewById(R.id.status_indicator_add_task);
-        statusIndicator.setImageResource(R.drawable.cercle_in_progress); // Utilisez le fichier XML correspondant à la couleur désirée
     }
 
     private void addTask() {
         String title = titleEditText.getText().toString();
         String content = contentEditText.getText().toString();
         String status = statusSpinner.getSelectedItem().toString();
+
+        if (title.isEmpty()) {
+            titleEditText.setError("Le nom de la tâche est requis");
+            return;
+        }
 
         taskDataSource.insertTask(title, content, status);
         finish(); // Retourne à l'activité précédente après l'ajout de la tâche
