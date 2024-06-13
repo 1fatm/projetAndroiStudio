@@ -6,4 +6,13 @@
         <item>In Progress</item>
         <item>Bug</item>
     </string-array>
+    <string-array name="filter_options">
+        <item>Filter par</item>
+        <item>Todo</item>
+        <item>In Progress</item>
+        <item>Done</item>
+        <item>Bug</item>
+        <item>Appliquer</item>
+    </string-array>
+
 </resources>

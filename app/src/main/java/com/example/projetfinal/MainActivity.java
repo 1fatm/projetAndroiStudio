@@ -2,16 +2,23 @@ package com.example.projetfinal;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FilterDialogFragment.FilterDialogListener {
 
     private TaskDataSource taskDataSource;
     private ListView taskListView;
@@ -40,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         filterIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showFilterDialog();
+                showFilterPopup();
             }
         });
 
@@ -58,6 +65,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.filter_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_filter) {
+            showFilterPopup();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showFilterPopup() {
+        // Inflate the filter popup layout
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.filter_popup, null);
+
+        // Create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // Touche hors popup ferme le popup
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // Affiche la popup window
+        popupWindow.showAsDropDown(findViewById(R.id.action_filter));
+
+        // Gérer les actions du bouton "Appliquer"
+        Button applyButton = popupView.findViewById(R.id.apply_filter);
+        applyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Gérer les cases cochées et appliquer le filtre
+                CheckBox todoCheckBox = popupView.findViewById(R.id.filter_todo);
+                CheckBox inProgressCheckBox = popupView.findViewById(R.id.filter_in_progress);
+                CheckBox doneCheckBox = popupView.findViewById(R.id.filter_done);
+                CheckBox bugCheckBox = popupView.findViewById(R.id.filter_bug);
+
+                List<String> selectedFilters = new ArrayList<>();
+                if (todoCheckBox.isChecked()) selectedFilters.add("To Do");
+                if (inProgressCheckBox.isChecked()) selectedFilters.add("In Progress");
+                if (doneCheckBox.isChecked()) selectedFilters.add("Done");
+                if (bugCheckBox.isChecked()) selectedFilters.add("Bug");
+
+                applyTaskFilter(selectedFilters);
+                popupWindow.dismiss();
+            }
+        });
+    }
+
+    private void applyTaskFilter(List<String> filters) {
+        List<Task> filteredTasks = new ArrayList<>();
+        for (Task task : allTasks) {
+            if (filters.contains(task.getStatus())) {
+                filteredTasks.add(task);
+            }
+        }
+        TaskAdapter adapter = new TaskAdapter(this, filteredTasks);
+        taskListView.setAdapter(adapter);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         loadTaskTitles();
@@ -69,25 +139,14 @@ public class MainActivity extends AppCompatActivity {
         taskListView.setAdapter(adapter);
     }
 
-    private void showFilterDialog() {
-        DialogFragment filterDialog = new FilterDialogFragment();
-        filterDialog.show(getSupportFragmentManager(), "filterDialog");
-    }
-
-    public void filterTasks(String status) {
-        List<Task> filteredTasks = new ArrayList<>();
-        for (Task task : allTasks) {
-            if (task.getStatus().equals(status)) {
-                filteredTasks.add(task);
-            }
-        }
-        TaskAdapter adapter = new TaskAdapter(this, filteredTasks);
-        taskListView.setAdapter(adapter);
-    }
-
     @Override
     protected void onDestroy() {
         taskDataSource.close();
         super.onDestroy();
+    }
+
+    @Override
+    public void onFilterApplied(List<String> selectedFilters) {
+        applyTaskFilter(selectedFilters);
     }
 }

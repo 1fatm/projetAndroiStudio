@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@android:color/white"
+    android:elevation="8dp">
+
+<TextView
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Filter par"
+android:textStyle="bold"
+android:paddingBottom="8dp"/>
+
+<CheckBox
+android:id="@+id/filter_todo"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Todo"/>
+
+<CheckBox
+android:id="@+id/filter_in_progress"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="In progress"/>
+
+<CheckBox
+android:id="@+id/filter_done"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Done"/>
+
+<CheckBox
+android:id="@+id/filter_bug"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Bug"/>
+
+<Button
+android:id="@+id/apply_filter"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+android:text="Appliquer"
+android:layout_marginTop="8dp"/>
+    </LinearLayout>

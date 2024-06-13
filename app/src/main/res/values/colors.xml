@@ -1,6 +1,6 @@
 <resources>
-    <color name="gray"> #4F4F4F</color>
-    <color name="blue">#56CCF2</color>
+    <color name="gray"> #7D7A7A</color>
+    <color name="blue"> #56CCF2 </color>
     <color name="green">#27AE60</color>
     <color name="red">#EB5757</color>
 </resources>
