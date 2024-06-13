@@ -80,25 +80,24 @@ public class MainActivity extends AppCompatActivity implements FilterDialogFragm
     }
 
     private void showFilterPopup() {
-        // Inflate the filter popup layout
+
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.filter_popup, null);
 
-        // Create the popup window
+
         int width = LinearLayout.LayoutParams.WRAP_CONTENT;
         int height = LinearLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = true; // Touche hors popup ferme le popup
         final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
 
-        // Affiche la popup window
+
         popupWindow.showAsDropDown(findViewById(R.id.action_filter));
 
-        // Gérer les actions du bouton "Appliquer"
+
         Button applyButton = popupView.findViewById(R.id.apply_filter);
         applyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Gérer les cases cochées et appliquer le filtre
                 CheckBox todoCheckBox = popupView.findViewById(R.id.filter_todo);
                 CheckBox inProgressCheckBox = popupView.findViewById(R.id.filter_in_progress);
                 CheckBox doneCheckBox = popupView.findViewById(R.id.filter_done);

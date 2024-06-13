@@ -3,4 +3,6 @@
     <color name="blue"> #56CCF2 </color>
     <color name="green">#27AE60</color>
     <color name="red">#EB5757</color>
+    <color name="custom_button_color">#FF5733</color>
+
 </resources>

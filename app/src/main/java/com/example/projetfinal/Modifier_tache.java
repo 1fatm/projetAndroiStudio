@@ -25,20 +25,14 @@ public class Modifier_tache extends AppCompatActivity {
         cancelImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retourner à l'activité principale
                 Intent intent = new Intent(Modifier_tache.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-
-        // Récupérer le Spinner status_button
         Spinner statusSpinner = findViewById(R.id.status_button);
-
-        // Définir les statuts et les couleurs correspondantes
         String[] statuses = {"To Do", "Done", "In Progress", "Bug"};
         int[] colors = {R.color.gray, R.color.green, R.color.blue, R.color.red};
 
-        // Créer un CustomSpinnerAdapter et le configurer
         CustomSpinnerAdapter adapter = new CustomSpinnerAdapter(this, statuses, colors);
         statusSpinner.setAdapter(adapter);
 

@@ -35,6 +35,7 @@ public class Ajouter_taches_Activity extends AppCompatActivity {
         statusSpinner.setAdapter(adapter);
 
         Button addButton = findViewById(R.id.add_task_button);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +47,7 @@ public class Ajouter_taches_Activity extends AppCompatActivity {
         cancelImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Retourner à l'activité principale
+
                 Intent intent = new Intent(Ajouter_taches_Activity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -64,7 +65,7 @@ public class Ajouter_taches_Activity extends AppCompatActivity {
         }
 
         taskDataSource.insertTask(title, content, status);
-        finish(); // Retourne à l'activité précédente après l'ajout de la tâche
+        finish();
     }
 
     @Override

@@ -34,10 +34,10 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
             View statusCircle = itemView.findViewById(R.id.status_circle);
 
-            // Récupération du statut de la tâche
+
             String status = currentTask.getStatus();
 
-            // Sélection de la ressource du contour et du cercle en fonction du statut
+
             int borderResourceId;
             int circleResourceId;
 
@@ -64,7 +64,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
                     break;
             }
 
-            // Affectation des ressources aux vues
+
             itemView.setBackgroundResource(borderResourceId);
             statusCircle.setBackgroundResource(circleResourceId);
         }
