@@ -18,13 +18,13 @@ android:paddingBottom="8dp"/>
 android:id="@+id/filter_todo"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-android:text="Todo"/>
+android:text="To Do"/>
 
 <CheckBox
 android:id="@+id/filter_in_progress"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
-android:text="In progress"/>
+android:text="In Progress"/>
 
 <CheckBox
 android:id="@+id/filter_done"
